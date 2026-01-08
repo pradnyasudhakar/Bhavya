@@ -8,7 +8,7 @@ interface ParagraphProps {
 
 export default function Paragraph({ children, className = "" }: ParagraphProps) {
   return (
-    <p className={clsx("text-base text-gray-700", manrope.variable, className)}>
+    <p className={clsx("text-base text-gray-700", manrope.className, className)}>
       {children}
     </p>
   );
