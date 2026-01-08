@@ -1,14 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import { newsReader } from "@/lib/fonts";
-import Heading from "@/components/ui/Heading";
+import { H2 } from "../ui/Heading";
+import Paragraph from "../ui/Paragraph";
 import {
   Instagram,
   Linkedin,
   Facebook,
   Youtube,
 } from "lucide-react";
-import Paragraph from "../ui/Paragraph";
+
 
 export default function Footer() {
   return (
@@ -37,7 +38,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-2 gap-10 flex-1">
 
           <div className="">
-            <Heading level={2} >Culture & Heritage</Heading>
+            <H2 >Culture & Heritage</H2>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>Traditions & Festivals</li>
               <li>History & Legacy</li>
@@ -45,7 +46,7 @@ export default function Footer() {
           </div>
 
           <div className="">
-            <Heading level={2}>Food & Lifestyle</Heading>
+            <H2>Food & Lifestyle</H2>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>Cuisine & Recipes</li>
               <li>Lifestyle</li>
@@ -53,7 +54,7 @@ export default function Footer() {
           </div>
 
           <div className="">
-            <Heading level={2} >Arts & Entertainment</Heading>
+            <H2 >Arts & Entertainment</H2>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>Performing & Visual Arts</li>
               <li>Stories & Narratives</li>
@@ -61,7 +62,7 @@ export default function Footer() {
           </div>
 
           <div className="">
-            <Heading level={2} >Environment & Development</Heading>
+            <H2 >Environment & Development</H2>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>Biodiversity & Ecology</li>
               <li>Infrastructure & Innovation</li>

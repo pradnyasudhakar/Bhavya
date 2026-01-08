@@ -21,7 +21,7 @@ export default function Navbar() {
           Bhavya Maharashtra
         </Link>
 
-        {/* Desktop Menu (UNCHANGED) */}
+        {/* Desktop Menu */}
         <nav className="hidden md:flex gap-8 text-gray-800">
           {/* Culture & Heritage */}
           <div className="group relative">
@@ -33,31 +33,31 @@ export default function Navbar() {
               />
             </button>
 
-            <div className="absolute left-0 top-full h-6 w-full"></div>
-
             <div
               className="
-              fixed inset-x-0 top-[72px]
-              bg-white shadow-lg z-50
-              opacity-0 translate-y-4
-              pointer-events-none
-              transition-all duration-300 ease-out
-              group-hover:opacity-100
-              group-hover:translate-y-0
-              group-hover:pointer-events-auto
-            "
+                fixed inset-x-0 top-[72px]
+                bg-white shadow-lg z-50
+                opacity-0 translate-y-4
+                pointer-events-none
+                transition-all duration-300 ease-out
+                group-hover:opacity-100
+                group-hover:translate-y-0
+                group-hover:pointer-events-auto
+              "
             >
               <div className="container mx-auto px-10 py-10 flex gap-10">
-                <div className="w-[420px]">
-                  <div className="rounded-xl overflow-hidden">
-                    <img
-                      src="/images/temple.png"
-                      alt="Temple"
-                      className="w-full h-[260px] object-cover"
-                    />
-                  </div>
+                {/* Left Image */}
+                <div className="w-[420px] rounded-xl overflow-hidden">
+                  <Image
+                    src="/images/temple.png"
+                    alt="Temple"
+                    width={420}
+                    height={260}
+                    className="w-full h-[260px] object-cover"
+                  />
                 </div>
 
+                {/* Right content */}
                 <div className="flex flex-1 gap-10">
                   <div className="ml-10">
                     <h4 className="font-semibold mb-4">
@@ -106,6 +106,7 @@ export default function Navbar() {
         <button
           className="md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle Menu"
         >
           {mobileOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -113,7 +114,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden bg-white overflow-hidden transition-all duration-500 ease-in-out ${
+        className={`md:hidden bg-white overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out ${
           mobileOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
@@ -133,10 +134,8 @@ export default function Navbar() {
           </button>
 
           <div
-            className={`pl-4 space-y-2 text-gray-600 transition-all duration-500 ${
-              mobileDrop
-                ? "max-h-60 opacity-100"
-                : "max-h-0 opacity-0 overflow-hidden"
+            className={`pl-4 space-y-2 text-gray-600 transition-[max-height,opacity] duration-500 overflow-hidden ${
+              mobileDrop ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
             }`}
           >
             <p>Temples / Monuments</p>

@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { ArrowDown } from "lucide-react";
-import Heading from "@/components/ui/Heading";
+import { H1 } from "@/components/ui/Heading";
+
 
 export default function HomePage() {
   const router = useRouter();
@@ -82,11 +83,11 @@ export default function HomePage() {
 
       {/* CENTER CONTENT */}
       <div className="relative z-10 max-w-[1000px] text-center px-4">
-        <Heading level={1}>
+        <H1>
           Experience the charm of{" "}
           <span className="text-orange-500">Maharashtra’s</span>{" "}
           finest offerings.
-        </Heading>
+        </H1>
 
         {/* SCROLL */}
         <button
