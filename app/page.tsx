@@ -99,7 +99,7 @@ export default function HomePage() {
             hover:text-black transition
           "
         >
-          <span>SCROLL</span>
+          <span>SCROLL changes</span>
           <ArrowDown
             size={18}
             strokeWidth={1.5}
