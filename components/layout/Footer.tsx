@@ -1,25 +1,21 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { newsReader } from "@/lib/fonts";
-import { H2 } from "../ui/Heading";
-import Paragraph from "../ui/Paragraph";
-import {
-  Instagram,
-  Linkedin,
-  Facebook,
-  Youtube,
-} from "lucide-react";
-
+import { H2 } from "@/components/ui/Heading";
+import Paragraph from "@/components/ui/Paragraph";
+import { Instagram, Linkedin, Facebook, Youtube } from "lucide-react";
 
 export default function Footer() {
   return (
     <footer className="bg-[#FFF1E6] text-gray-800">
-      <div className="container mx-auto px-8 py-12 flex justify-between gap-10">
+      <div className="container mx-auto px-8 py-12 flex flex-col md:flex-row justify-between gap-10">
 
-        {/* LEFT */}
+        {/* LEFT SECTION */}
         <div className="max-w-xs">
           <h2
-            className={`${newsReader.className} text-[40px] leading-12 font-medium text-orange-500 mb-4`}
+            className={`${newsReader.className} text-[40px] leading-[48px] font-medium text-orange-500 mb-4`}
           >
             Bhavya Maharashtra
           </h2>
@@ -35,17 +31,16 @@ export default function Footer() {
         </div>
 
         {/* CENTER LINKS */}
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-10 flex-1">
-
-          <div className="">
-            <H2 >Culture & Heritage</H2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 flex-1">
+          <div>
+            <H2>Culture & Heritage</H2>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>Traditions & Festivals</li>
               <li>History & Legacy</li>
             </ul>
           </div>
 
-          <div className="">
+          <div>
             <H2>Food & Lifestyle</H2>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>Cuisine & Recipes</li>
@@ -53,22 +48,21 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="">
-            <H2 >Arts & Entertainment</H2>
+          <div>
+            <H2>Arts & Entertainment</H2>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>Performing & Visual Arts</li>
               <li>Stories & Narratives</li>
             </ul>
           </div>
 
-          <div className="">
-            <H2 >Environment & Development</H2>
+          <div>
+            <H2>Environment & Development</H2>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>Biodiversity & Ecology</li>
               <li>Infrastructure & Innovation</li>
             </ul>
           </div>
-
         </div>
 
         {/* RIGHT IMAGE */}
@@ -85,15 +79,16 @@ export default function Footer() {
 
       {/* BOTTOM BAR */}
       <div className="border-t border-orange-200 py-4 text-sm">
-        <div className="container mx-auto px-8 flex justify-between items-center text-gray-600">
+        <div className="container mx-auto px-8 flex flex-col md:flex-row justify-between items-center text-gray-600 gap-2 md:gap-0">
           <div className="flex gap-4">
             <Link href="#">Terms of Use</Link>
             <Link href="#">Privacy Policy</Link>
             <Link href="#">Contact Us</Link>
           </div>
 
-          <p>
-            Made with Love by <span className="font-medium">SAAA Consultants Pvt. Ltd.</span>
+          <p className="text-center md:text-right">
+            Made with ❤️ by{" "}
+            <span className="font-medium">SAAA Consultants Pvt. Ltd.</span>
           </p>
         </div>
       </div>
