@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import { manrope, newsReader } from "@/lib/fonts";
 import ClientLayout from "@/components/layout/ClientLayout";
 
 export default function RootLayout({
@@ -9,9 +8,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${manrope.className} ${newsReader.variable} bg-white text-gray-900`}
-      >
+      <body className="bg-white text-gray-900">
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

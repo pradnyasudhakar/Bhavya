@@ -1,13 +1,11 @@
-import { Newsreader, Manrope } from "next/font/google";
-
-export const newsReader = Newsreader({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
+import { Manrope, Newsreader } from "next/font/google";
 
 export const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  display: "swap",
+});
+
+export const newsReader = Newsreader({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
