@@ -16,7 +16,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className={`${newsReader.className} text-[30px] md:text-[35px] font-semibold text-orange-500`}
+          className={`${newsReader.className} text-[30px] md:text-[35px] font-medium text-[#FF7722]`}
         >
           Bhavya Maharashtra
         </Link>
@@ -25,7 +25,7 @@ export default function Navbar() {
         <nav className="hidden md:flex gap-8 text-gray-800">
           {/* Culture & Heritage */}
           <div className="group relative">
-            <button className="flex items-center gap-1 hover:text-orange-500">
+            <button className="flex items-center gap-1 hover:text-[#FF7722]">
               Culture & Heritage
               <ChevronDown
                 size={16}
@@ -89,15 +89,15 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className="flex items-center gap-1 hover:text-orange-500 cursor-pointer">
+          <div className="flex items-center gap-1 hover:text-[#FF7722] cursor-pointer">
             Food & Lifestyle <ChevronDown size={16} />
           </div>
 
-          <div className="flex items-center gap-1 hover:text-orange-500 cursor-pointer">
+          <div className="flex items-center gap-1 hover:text-[#FF7722] cursor-pointer">
             Art & Entertainment <ChevronDown size={16} />
           </div>
 
-          <div className="flex items-center gap-1 hover:text-orange-500 cursor-pointer">
+          <div className="flex items-center gap-1 hover:text-[#FF7722] cursor-pointer">
             Environment & Development <ChevronDown size={16} />
           </div>
         </nav>

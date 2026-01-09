@@ -10,7 +10,7 @@ export function H1({ children }: HeadingProps) {
     <h1
       className={clsx(
         newsReader.className,
-        "text-[70px] font-medium leading-[100%] tracking-[0%] text-center"
+        " text-[50px] 2xl:text-[60px] lg:text-[40px] font-medium leading-[100%] tracking-[0%] text-center"
       )}
     >
       {children}
