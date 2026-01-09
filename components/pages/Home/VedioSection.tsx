@@ -43,18 +43,16 @@ export default function VideoSection() {
       {/* HERO VIDEO SECTION */}
       <section
         ref={sectionRef}
-        className="relative h-[150vh] bg-[#FBFBFB] overflow-hidden"
+        className="relative h-screen bg-[#FBFBFB] overflow-hidden"
       >
-        <div className="sticky top-0 max-w-[1600px] min-h-[calc(100vh-86px)] flex items-center justify-center overflow-hidden">
+        <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
           <div
-            className="relative w-full h-[100vh] overflow-hidden"
+            className="relative w-full h-full overflow-hidden"
             style={{
               opacity: videoOpacity,
               transform: `scale(${videoScale})`,
               borderRadius: `${videoBorderRadius}px`,
-              boxShadow: `0 ${(1 - easedProgress) * 50}px ${
-                (1 - easedProgress) * 100
-              }px rgba(0,0,0,0.3)`,
+              boxShadow: `0 ${(1 - easedProgress) * 50}px ${(1 - easedProgress) * 100}px rgba(0,0,0,0.3)`,
               filter: `blur(${videoBlur}px)`,
               transition: "filter 0.3s ease-out",
             }}
@@ -68,26 +66,15 @@ export default function VideoSection() {
               playsInline
               className="w-full h-full object-cover"
             />
-
-            {/* Vignette overlay */}
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(circle, transparent 50%, rgba(0,0,0,0.5) 100%)",
-                opacity: Math.max(0, 1 - easedProgress),
-              }}
-            />
           </div>
         </div>
       </section>
 
       {/* NEXT SECTION */}
-      <section className="relative w-full min-h-screen bg-gray-100 flex items-center justify-center overflow-hidden">
+      <section className="relative py-16 bg-gray-100 flex items-center justify-center overflow-hidden">
         <div className="text-center px-4">
-          <h2 className="text-4xl font-bold mb-4">Next Section</h2>
-          <p className="max-w-xl text-lg">
-            Scrolled from hero video smoothly with parallax effect.
+          <p className="max-w-xl mx-auto text-lg text-gray-700">
+            Explore the essence of Maharashtra through its rich traditions, diverse cuisine, vibrant arts, and storied heritage. Discover its landscapes, festivals, and innovations, all brought together to celebrate the spirit of this remarkable state in one engaging destination.
           </p>
         </div>
       </section>

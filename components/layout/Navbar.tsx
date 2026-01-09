@@ -5,20 +5,34 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { newsReader } from "@/lib/fonts";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileDrop, setMobileDrop] = useState(false);
 
+  //  Scroll progress track karna - page ki total scroll
+  const { scrollYProgress } = useScroll();
+
+  //  Logo color transition - 0 to 0.3 scroll progress par black se orange
+  // scrollYProgress 0 = top of page, 1 = bottom of page
+  const logoColor = useTransform(
+    scrollYProgress,
+    [0, 0.3], // 30% scroll hone par color change hoga
+    ["#000000", "#FF7722"] // Black se Orange
+  );
+
   return (
-    <header className="bg-[#FAFAFA] sticky top-0 z-50 shadow-[0px_3px_30px_0px_#0000001A]">
+    <header className="bg-[#FAFAFA] fixed top-0 left-0 right-0 z-9999 shadow-[0px_3px_30px_0px_#0000001A]">
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link
-          href="/"
-          className={`${newsReader.className} text-[30px] md:text-[35px] font-medium text-[#FF7722]`}
-        >
-          Bhavya Maharashtra
+        {/* Logo with animated color */}
+        <Link href="/">
+          <motion.span
+            style={{ color: logoColor }}
+            className={`${newsReader.className} text-[30px] md:text-[35px] font-medium`}
+          >
+            Bhavya Maharashtra
+          </motion.span>
         </Link>
 
         {/* Desktop Menu */}
@@ -35,8 +49,8 @@ export default function Navbar() {
 
             <div
               className="
-                fixed inset-x-0 top-[72px]
-                bg-white shadow-lg z-50
+                fixed inset-x-0 left-0
+                bg-white shadow-lg z-9998
                 opacity-0 translate-y-4
                 pointer-events-none
                 transition-all duration-300 ease-out
@@ -44,16 +58,17 @@ export default function Navbar() {
                 group-hover:translate-y-0
                 group-hover:pointer-events-auto
               "
+              style={{ top: 'var(--navbar-height, 72px)' }}
             >
               <div className="container mx-auto px-10 py-10 flex gap-10">
                 {/* Left Image */}
-                <div className="w-[420px] rounded-xl overflow-hidden">
+                <div className="w-105 rounded-xl overflow-hidden">
                   <Image
                     src="/images/temple.png"
                     alt="Temple"
                     width={420}
                     height={260}
-                    className="w-full h-[260px] object-cover"
+                    className="w-full h-65 object-cover"
                   />
                 </div>
 
@@ -115,7 +130,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div
         className={`md:hidden bg-white overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out ${
-          mobileOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
+          mobileOpen ? "max-h-175 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="px-6 py-4 space-y-4 text-gray-800">

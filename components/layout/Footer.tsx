@@ -15,7 +15,7 @@ export default function Footer() {
         {/* LEFT SECTION */}
         <div className="max-w-xs">
           <h2
-            className={`${newsReader.className} text-[40px] leading-[48px] font-medium text-orange-500 mb-4`}
+            className={`${newsReader.className} text-[40px] leading-12 font-medium text-orange-500 mb-4`}
           >
             Bhavya Maharashtra
           </h2>
