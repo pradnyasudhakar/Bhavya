@@ -24,12 +24,12 @@ export default function Navbar() {
 
   return (
     <header className="bg-[#FAFAFA] fixed top-0 left-0 right-0 z-9999 shadow-[0px_3px_30px_0px_#0000001A]">
-      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="container max-w-7xl mx-auto px-10 py-4 flex items-center justify-between">
         {/* Logo with animated color */}
         <Link href="/">
           <motion.span
             style={{ color: logoColor }}
-            className={`${newsReader.className} text-[30px] md:text-[35px] font-medium`}
+            className={`${newsReader.className} text-[30px] 2xl:text-[40px]! font-medium`}
           >
             Bhavya Maharashtra
           </motion.span>
@@ -75,10 +75,10 @@ export default function Navbar() {
                 {/* Right content */}
                 <div className="flex flex-1 gap-10">
                   <div className="ml-10">
-                    <h4 className="font-semibold mb-4">
+                    <h4 className="font-medium mb-4 text-[#0F0F0F] ">
                       Traditions & Festivals
                     </h4>
-                    <ul className="space-y-3 text-gray-600">
+                    <ul className="space-y-3 text-[#454545]">
                       <li className="text-orange-500">• Temples / Monuments</li>
                       <li>Festivals</li>
                       <li>Languages</li>
@@ -86,11 +86,11 @@ export default function Navbar() {
                     </ul>
                   </div>
 
-                  <div className="w-px bg-gray-200"></div>
+                  <div className="w-px bg-[#CCCCCC]"></div>
 
                   <div>
-                    <h4 className="font-semibold mb-4">History & Legacy</h4>
-                    <ul className="space-y-3 text-gray-600">
+                    <h4 className="font-medium mb-4 text-[#0F0F0F]">History & Legacy</h4>
+                    <ul className="space-y-3 text-[#454545]">
                       <li>History</li>
                       <li>Forts</li>
                       <li>Saints / Poets / Writers</li>
@@ -103,10 +103,70 @@ export default function Navbar() {
               </div>
             </div>
           </div>
+          {/* Culture & Heritage */}
+          <div className="group relative">
+            <button className="flex items-center gap-1 hover:text-[#FF7722]">
+              Food & Lifestyle
+              <ChevronDown
+                size={16}
+                className="transition-transform duration-300 ease-out group-hover:rotate-180"
+              />
+            </button>
 
-          <div className="flex items-center gap-1 hover:text-[#FF7722] cursor-pointer">
-            Food & Lifestyle <ChevronDown size={16} />
+            <div
+              className="
+                fixed inset-x-0 left-0
+                bg-white shadow-lg z-9998
+                opacity-0 translate-y-4
+                pointer-events-none
+                transition-all duration-300 ease-out
+                group-hover:opacity-100
+                group-hover:translate-y-0
+                group-hover:pointer-events-auto
+              "
+              style={{ top: 'var(--navbar-height, 72px)' }}
+            >
+              <div className="container mx-auto px-10 py-10 flex gap-10">
+                {/* Left Image */}
+                <div className="w-105 rounded-xl overflow-hidden">
+                  <Image
+                    src="/images/culture-img.png"
+                    alt="Culture"
+                    width={420}
+                    height={260}
+                    className="w-full h-65 object-cover"
+                  />
+                </div>
+
+                {/* Right content */}
+                <div className="flex flex-1 gap-10">
+                  <div className="ml-10">
+                    <h4 className="font-medium mb-4 text-[#0F0F0F] ">
+                      Cuisine & Recipes
+                    </h4>
+                    <ul className="space-y-3 text-[#454545]">
+                      <li > Temples / Monuments</li>
+                      <li>Seasonal Fruits & Food Grains</li>
+                      <li className="text-orange-500">• Street Food</li>
+                      <li>Best Restaurants</li>
+                    </ul>
+                  </div>
+
+                  <div className="w-px bg-[#CCCCCC]"></div>
+
+                  <div>
+                    <h4 className="font-medium mb-4 text-[#0F0F0F] ">Lifestyle</h4>
+                    <ul className="space-y-3 text-gray-600">
+                      <li>Attire</li>
+                      
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
+          
 
           <div className="flex items-center gap-1 hover:text-[#FF7722] cursor-pointer">
             Art & Entertainment <ChevronDown size={16} />

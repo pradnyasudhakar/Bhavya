@@ -107,7 +107,7 @@ export default function HomePage() {
                   w-[clamp(320px,45vw,800px)]
                   max-w-200
                   h-[clamp(180px,25vh,450px)]
-                  overflow-hidden
+                  overflow-hidden 
                   shadow-xl
                   origin-center
                 "
@@ -118,7 +118,7 @@ export default function HomePage() {
                   loop
                   muted
                   playsInline
-                  className="w-full h-full object-cover"
+                  className="w-full h-full  object-cover"
                 />
               </motion.div>
 

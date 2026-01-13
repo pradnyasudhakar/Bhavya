@@ -1,4 +1,5 @@
 // app/home/page.tsx
+import FeaturedSection from "@/components/pages/Home/FeaturedSection";
 import HomePage from "@/components/pages/Home/Herosection";
 import TypesSection from "@/components/pages/Home/TypesSection";
 // import VedioSection from "@/components/pages/Home/VedioSection";
@@ -9,6 +10,7 @@ export default function Page() {
     <>
       <HomePage />
       <TypesSection />
+      <FeaturedSection />
      
       {/* <VedioSection /> */}
      
