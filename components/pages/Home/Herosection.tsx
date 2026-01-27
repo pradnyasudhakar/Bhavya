@@ -17,31 +17,45 @@ export default function HomePage() {
     offset: ["start start", "end start"],
   });
   
-
-  //  Video zoom animation - video full viewport (100vh/100vw) tak zoom hoga
-  // Screen ke exact size tak zoom hoga
+  // Video zoom animation
   const videoScale = useTransform(scrollYProgress, [0, 1], [1, 8]);
   const videoY = useTransform(scrollYProgress, [0, 1], [0, 0]);
   const videoBorderRadius = useTransform(scrollYProgress, [0, 0.5], [12, 0]);
 
-  //  Images opacity - video zoom hone par images fade out hongi
-  const imagesOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const imagesScale = useTransform(scrollYProgress, [0, 0.6], [1, 0.8]);
+  // Images slide out animations
+  const topImageY = useTransform(scrollYProgress, [0, 0.6], [0, -300]);
+  const leftImageX = useTransform(scrollYProgress, [0, 0.6], [0, -300]);
+  const rightImageX = useTransform(scrollYProgress, [0, 0.6], [0, 300]);
+  const bottomLeftImageY = useTransform(scrollYProgress, [0, 0.6], [0, 300]);
+  const bottomLeftImageX = useTransform(scrollYProgress, [0, 0.6], [0, -200]);
+  const bottomRightImageY = useTransform(scrollYProgress, [0, 0.6], [0, 300]);
+  const bottomRightImageX = useTransform(scrollYProgress, [0, 0.6], [0, 200]);
 
-  //  Center content opacity
+  // Images opacity
+  const imagesOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  // Center content - heading bhi TOP me slide out hogi
   const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.4], [0, -300]);
 
   return (
     <>
-      {/* SCROLL CONTAINER - yeh extra height dega taaki scroll ho sake */}
-      <div ref={containerRef} className="relative h-[400vh] max-w-400 ">
-        {/* STICKY SECTION - yeh fixed position mein rahega */}
-        <div className="sticky top-0 h-screen w-full overflow-hidden">
+      {/* SCROLL CONTAINER with SNAP SCROLL */}
+      <div 
+        ref={containerRef} 
+        className="relative h-[400vh] max-w-400 snap-y snap-mandatory"
+      >
+        {/* STICKY SECTION - yeh snap point 1 */}
+        <div className="sticky top-0 h-screen w-full overflow-hidden snap-start">
           <section className="relative bg-[#FBFBFB] w-full h-full">
             <div className="relative z-10 mx-auto max-w-400 h-full pt-12 flex items-center justify-center overflow-hidden">
-              {/* LEFT IMAGE */}
+              
+              {/* LEFT IMAGE - slides to LEFT */}
               <motion.div
-                style={{ opacity: imagesOpacity, scale: imagesScale }}
+                style={{ 
+                  x: leftImageX,
+                  opacity: imagesOpacity 
+                }}
                 className="absolute left-0 -translate-y-1/2 hidden lg:block"
               >
                 <Image
@@ -53,9 +67,12 @@ export default function HomePage() {
                 />
               </motion.div>
 
-              {/* RIGHT IMAGE */}
+              {/* RIGHT IMAGE - slides to RIGHT */}
               <motion.div
-                style={{ opacity: imagesOpacity, scale: imagesScale }}
+                style={{ 
+                  x: rightImageX,
+                  opacity: imagesOpacity 
+                }}
                 className="absolute right-0 -translate-y-1/2 hidden lg:block"
               >
                 <Image
@@ -67,9 +84,12 @@ export default function HomePage() {
                 />
               </motion.div>
 
-              {/* TOP IMAGE */}
+              {/* TOP IMAGE - slides UP */}
               <motion.div
-                style={{ opacity: imagesOpacity, scale: imagesScale }}
+                style={{ 
+                  y: topImageY,
+                  opacity: imagesOpacity 
+                }}
                 className="absolute top-0 left-1/2 -translate-x-1/2 hidden xl:block"
               >
                 <Image
@@ -81,9 +101,13 @@ export default function HomePage() {
                 />
               </motion.div>
 
-              {/* BOTTOM LEFT IMAGE */}
+              {/* BOTTOM LEFT IMAGE - slides DOWN and LEFT */}
               <motion.div
-                style={{ opacity: imagesOpacity, scale: imagesScale }}
+                style={{ 
+                  y: bottomLeftImageY,
+                  x: bottomLeftImageX,
+                  opacity: imagesOpacity 
+                }}
                 className="absolute bottom-0 left-0 hidden xl:block"
               >
                 <Image
@@ -95,7 +119,7 @@ export default function HomePage() {
                 />
               </motion.div>
 
-              {/*  VIDEO - yeh zoom hoke full width landscape view mein jayega */}
+              {/* VIDEO - yeh zoom hoke full width landscape view mein jayega */}
               <motion.div
                 style={{
                   scale: videoScale,
@@ -110,6 +134,7 @@ export default function HomePage() {
                   overflow-hidden 
                   shadow-xl
                   origin-center
+                  z-20
                 "
               >
                 <video
@@ -118,13 +143,17 @@ export default function HomePage() {
                   loop
                   muted
                   playsInline
-                  className="w-full h-full  object-cover"
+                  className="w-full h-full object-cover"
                 />
               </motion.div>
 
-              {/* BOTTOM RIGHT IMAGE */}
+              {/* BOTTOM RIGHT IMAGE - slides DOWN and RIGHT */}
               <motion.div
-                style={{ opacity: imagesOpacity, scale: imagesScale }}
+                style={{ 
+                  y: bottomRightImageY,
+                  x: bottomRightImageX,
+                  opacity: imagesOpacity 
+                }}
                 className="absolute bottom-0 right-0 hidden xl:block"
               >
                 <Image
@@ -132,13 +161,16 @@ export default function HomePage() {
                   alt="Bottom Right img"
                   width={230}
                   height={250}
-                  className=" 2xl:w-62.5 w-[clamp(150px,60vw,200px)] rounded-xl shadow-lg"
+                  className="2xl:w-62.5 w-[clamp(150px,60vw,200px)] rounded-xl shadow-lg"
                 />
               </motion.div>
 
-              {/* CENTER CONTENT */}
+              {/* CENTER CONTENT - heading TOP me slide out hogi */}
               <motion.div
-                style={{ opacity: contentOpacity }}
+                style={{ 
+                  opacity: contentOpacity,
+                  y: contentY 
+                }}
                 className="relative flex justify-between align-middle flex-col overflow-hidden z-10 max-w-200 2xl:max-w-250 text-center px-4"
               >
                 <H1>
@@ -164,11 +196,12 @@ export default function HomePage() {
           </section>
         </div>
       </div>
-      {/* NEXT SECTION */}
-      <section className="relative py-16 bg-[#FAFAFA] flex items-center justify-center overflow-hidden">
+
+      {/* NEXT SECTION - yeh snap point 2 */}
+      <section className="relative min-h-screen py-16 bg-[#FAFAFA] flex items-center justify-center overflow-hidden snap-start">
         <div className="text-center px-4">
-          <Paragraph className=" max-w-250 2xl:max-w-300 font-medium  mx-auto text-[30px] text-[#1D1D1D]">
-            Explore the essence of <span className="text-[#FF7722]" >Maharashtra</span> through its rich traditions, diverse cuisine, vibrant arts, and storied heritage. Discover its landscapes, festivals, and innovations, all brought together to celebrate the spirit of this remarkable state in one engaging destination.
+          <Paragraph className="max-w-250 2xl:max-w-300 font-medium mx-auto text-[30px] text-[#1D1D1D]">
+            Explore the essence of <span className="text-[#FF7722]">Maharashtra</span> through its rich traditions, diverse cuisine, vibrant arts, and storied heritage. Discover its landscapes, festivals, and innovations, all brought together to celebrate the spirit of this remarkable state in one engaging destination.
           </Paragraph>
         </div>
       </section>
