@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { H4 } from "@/components/ui/Heading";
 import { newsReader , manrope } from "@/lib/fonts";
 
 const featuredData = [
@@ -45,10 +46,12 @@ export default function FeaturedSection() {
       {/* CONTENT */}
       <div className="relative max-w-7xl mx-auto px-10 z-10">
 
-        {/* HEADING */}
-        <h2 className={`${newsReader.className} text-center py-6 text-[#FBFBFB] font-semibold 2xl:text-[50px] text-[45px] `} >
+       <div className="pb-8" >
+         {/* HEADING */}
+        <H4>
           Featured
-        </h2>
+        </H4>
+       </div>
 
         {/* CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">

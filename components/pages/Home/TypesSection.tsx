@@ -38,7 +38,7 @@ export default function TypesSection() {
 
       <div className=" relative max-w-7xl  mx-auto px-10  text-center">
         {/* HEADING */}
-        <div className="py-6">
+        <div className=" pb-8 ">
           <H3>
             Explore <span className="text-[#FF7A18]">Maharashtra</span>
           </H3>

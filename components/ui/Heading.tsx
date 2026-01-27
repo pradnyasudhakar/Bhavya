@@ -35,7 +35,19 @@ export function H3({ children }: HeadingProps) {
     <h3
       className={clsx(
         newsReader.className,
-        " text-[40px] 2xl:text-[50px] font-medium leading-[100%] tracking-[0%]"
+        " text-[45px] 2xl:text-[50px] font-medium leading-[100%] tracking-[0%]"
+      )}
+    >
+      {children}
+    </h3>
+  );
+}
+export function H4({ children }: HeadingProps) {
+  return (
+    <h3
+      className={clsx(
+        newsReader.className,
+        " text-[45px] 2xl:text-[50px] text-[#FBFBFB] text-center font-medium leading-[100%] tracking-[0%]"
       )}
     >
       {children}
