@@ -7,11 +7,13 @@ import { successResponse, errorResponse, validationErrorResponse } from '@/lib/u
 // GET: Single user
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await context.params
+
     const user = await prisma.user.findUnique({
-      where: { id: parseInt(params.id) },
+      where: { id: parseInt(id) },
       select: {
         id: true,
         email: true,
@@ -29,11 +31,11 @@ export async function GET(
         }
       }
     })
-    
+
     if (!user) {
       return errorResponse('User not found', 404)
     }
-    
+
     return successResponse(user)
   } catch (error) {
     console.error('Error fetching user:', error)
@@ -44,11 +46,12 @@ export async function GET(
 // PUT: Update user
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await context.params
     const body = await request.json()
-    
+
     // Validate input
     const validation = updateUserSchema.safeParse(body)
     if (!validation.success) {
@@ -56,12 +59,12 @@ export async function PUT(
     }
 
     const { email, name, password } = validation.data
-    
+
     // Check if user exists
     const existingUser = await prisma.user.findUnique({
-      where: { id: parseInt(params.id) }
+      where: { id: parseInt(id) }
     })
-    
+
     if (!existingUser) {
       return errorResponse('User not found', 404)
     }
@@ -71,7 +74,7 @@ export async function PUT(
       const emailExists = await prisma.user.findUnique({
         where: { email }
       })
-      
+
       if (emailExists) {
         return errorResponse('Email already exists', 409)
       }
@@ -85,7 +88,7 @@ export async function PUT(
 
     // Update user
     const user = await prisma.user.update({
-      where: { id: parseInt(params.id) },
+      where: { id: parseInt(id) },
       data: updateData,
       select: {
         id: true,
@@ -95,7 +98,7 @@ export async function PUT(
         updatedAt: true,
       }
     })
-    
+
     return successResponse(user)
   } catch (error: any) {
     console.error('Error updating user:', error)
@@ -106,21 +109,23 @@ export async function PUT(
 // DELETE: Delete user
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await context.params
+
     await prisma.user.delete({
-      where: { id: parseInt(params.id) }
+      where: { id: parseInt(id) }
     })
-    
+
     return successResponse({ message: 'User deleted successfully' })
   } catch (error: any) {
     console.error('Error deleting user:', error)
-    
+
     if (error.code === 'P2025') {
       return errorResponse('User not found', 404)
     }
-    
+
     return errorResponse('Error deleting user', 500)
   }
 }
