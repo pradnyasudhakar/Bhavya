@@ -4,13 +4,14 @@ import { useRouter } from "next/navigation";
 import { ArrowDown } from "lucide-react";
 import { H1 } from "@/components/ui/Heading";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, animate } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 import Paragraph from "@/components/ui/Paragraph";
 
 export default function HomePage() {
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -38,17 +39,84 @@ export default function HomePage() {
   const contentOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.4], [0, -300]);
 
+  // Smooth auto-scroll function with slower speed
+  const handleAutoScroll = () => {
+    if (isScrolling) return;
+    
+    setIsScrolling(true);
+    const container = containerRef.current;
+    if (!container) return;
+
+    const containerTop = container.getBoundingClientRect().top + window.scrollY;
+    const containerHeight = container.offsetHeight;
+    const currentScroll = window.scrollY;
+    const targetScroll = containerTop + containerHeight;
+
+    // Custom smooth scroll animation with slower duration
+    animate(currentScroll, targetScroll, {
+      duration: 2.5, // 2.5 seconds for slow smooth scroll
+      ease: [0.25, 0.1, 0.25, 1], // Custom easing for smoothness
+      onUpdate: (latest) => {
+        window.scrollTo(0, latest);
+      },
+      onComplete: () => {
+        setTimeout(() => {
+          setIsScrolling(false);
+        }, 300);
+      },
+    });
+  };
+
+  // Handle wheel event for single scroll trigger
+  useEffect(() => {
+    let scrollTimeout: NodeJS.Timeout;
+    let lastScrollTime = 0;
+    
+    const handleWheel = (e: WheelEvent) => {
+      const currentTime = Date.now();
+      const currentScroll = window.scrollY;
+      const container = containerRef.current;
+      
+      if (!container) return;
+      
+      const containerTop = container.getBoundingClientRect().top + window.scrollY;
+      const containerHeight = container.offsetHeight;
+      
+      // Check if we're in the hero section
+      if (currentScroll >= containerTop && currentScroll < containerTop + containerHeight - window.innerHeight) {
+        // Throttle scroll events (minimum 800ms between triggers)
+        if (currentTime - lastScrollTime < 800) return;
+        
+        if (e.deltaY > 0 && !isScrolling) {
+          e.preventDefault();
+          lastScrollTime = currentTime;
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            handleAutoScroll();
+          }, 100);
+        }
+      }
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      clearTimeout(scrollTimeout);
+    };
+  }, [isScrolling]);
+
   return (
     <>
       {/* SCROLL CONTAINER */}
       <div
         ref={containerRef}
-        className="relative h-[400vh] max-w-400 snap-y snap-mandatory"
+        className="relative h-[400vh]"
       >
         {/* FIRST SCREEN */}
-        <div className="sticky top-0 h-screen w-full overflow-hidden snap-start">
+        <div className="sticky top-0 h-screen w-full overflow-hidden">
           <section className="relative bg-[#FBFBFB] w-full h-full">
-            <div className="relative z-10 mx-auto max-w-400 h-full pt-12 flex items-center justify-center overflow-hidden">
+            <div className="relative z-10 mx-auto h-full pt-12 flex items-center justify-center overflow-hidden">
 
               {/* LEFT IMAGE */}
               <motion.div
@@ -169,11 +237,7 @@ export default function HomePage() {
 
                 {/* SCROLL BUTTON */}
                 <button
-                  onClick={() => {
-                    document
-                      .getElementById("next-section")
-                      ?.scrollIntoView({ behavior: "smooth" });
-                  }}
+                  onClick={handleAutoScroll}
                   className="mt-2 2xl:mt-4 mx-auto font-medium font-Manrope flex uppercase items-center gap-0 text-xs lg:text-[14px] tracking-[0.35em] text-[#454545] hover:text-black transition"
                 >
                   <span>SCROLL</span>
@@ -192,7 +256,7 @@ export default function HomePage() {
       {/* NEXT SECTION */}
       <section
         id="next-section"
-        className="relative  py-16 bg-[#FAFAFA] flex items-center justify-center overflow-hidden snap-start"
+        className="relative h-[400] py-16 bg-[#FAFAFA] flex items-center justify-center overflow-hidden"
       >
         <div className="text-center px-4">
           <Paragraph className="max-w-250 2xl:max-w-300 font-medium mx-auto text-[30px] text-[#1D1D1D]">
