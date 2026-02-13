@@ -35,8 +35,8 @@ export default function FeaturedSection() {
       {/* TOP HALF BACKGROUND */}
       <div
         className="
-          absolute top-0 left-0 w-full 
-          md:h-[50%] h-full
+          absolute top-0 left-0 w-full md:h-[65em]
+          xl:h-[50%] h-full
           bg-[url('/images/f-bg.png')]
           bg-cover bg-center
           z-0
@@ -54,7 +54,7 @@ export default function FeaturedSection() {
        </div>
 
         {/* CARDS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
 
           {featuredData.map((item, index) => (
             <div
